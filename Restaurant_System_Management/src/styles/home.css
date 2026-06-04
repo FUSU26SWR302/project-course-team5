@@ -1017,6 +1017,8 @@
   margin: 0 auto;
   padding: 6rem 5rem 3rem;
   overflow: hidden;
+  background-color: #faf9f6;
+  border-top: 1px solid rgba(52, 39, 22, 0.1);
 }
 
 .phurai-footer__watermark {
@@ -1122,6 +1124,15 @@
 }
 
 .phurai-footer__happy-hour dd {
+  color: #735c00;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.4;
+}
+
+.phurai-footer__happy-hour-day {
+  font-size: 0.875rem;
   color: #735c00;
 }
 

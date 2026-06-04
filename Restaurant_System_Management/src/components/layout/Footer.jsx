@@ -78,7 +78,10 @@ function Footer() {
             </div>
             <div className="phurai-footer__happy-hour">
               <dt>Happy Hour</dt>
-              <dd>4:00 PM — 7:00 PM Daily</dd>
+              <dd>
+                <span>4:00 PM — 7:00 PM</span>
+                <span className="phurai-footer__happy-hour-day">Daily</span>
+              </dd>
             </div>
           </dl>
         </div>
@@ -98,16 +101,6 @@ function Footer() {
           quagphu159@gmail.com
         </p>
       </div>
-
-      <nav className="phurai-footer__legal" aria-label="Legal">
-        <a href="#">MENU</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTRACT</a>
-        <a href="#">PRIVACY POLICY</a>
-        <a href="#">TERMS OF SERVICE</a>
-      </nav>
-
-      <p className="phurai-footer__copyright">© 2026 PHŪRAI. ALL RIGHTS RESERVED.</p>
     </footer>
   );
 }

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import '../../styles/menu.css';
 import { menuIcons, menuImages } from '../../data/menuAssets';
 
@@ -9,7 +10,6 @@ const sidebarLinks = [
     icon: 2,
     iconClass: 'icon-20',
     sectionId: 'signature-dish',
-    active: true,
   },
   { label: 'Seafood', icon: 3, iconClass: 'icon-seafood', sectionId: 'seafood' },
   {
@@ -59,6 +59,8 @@ function MenuSection({ id, title, subtitle, titleDark, variant, children }) {
 }
 
 function Menu() {
+  const [activeSection, setActiveSection] = useState('sushi-sashimi');
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -70,8 +72,31 @@ function Menu() {
       const offset = 92 + 24;
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
+      setActiveSection(sectionId);
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 130; // offset of navbar + buffer
+      
+      let currentSection = sidebarLinks[0]?.sectionId;
+      for (const link of sidebarLinks) {
+        const el = document.getElementById(link.sectionId);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (scrollPosition >= top) {
+            currentSection = link.sectionId;
+          }
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="menu-page">
@@ -82,7 +107,7 @@ function Menu() {
               <a
                 key={link.sectionId}
                 href={`#${link.sectionId}`}
-                className={`menu-sidebar__link${link.active ? ' is-active' : ''}${link.multiline ? ' menu-sidebar__link--multiline' : ''}`}
+                className={`menu-sidebar__link${activeSection === link.sectionId ? ' is-active' : ''}${link.multiline ? ' menu-sidebar__link--multiline' : ''}`}
                 onClick={(e) => handleSidebarClick(e, link.sectionId)}
               >
                 <img
